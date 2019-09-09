@@ -6,7 +6,6 @@ INFINITY = sys.maxsize
 pp = pprint.PrettyPrinter()
 
 # Read data
-
 def get(filename: str) -> (int, list):
     global pp
 
@@ -40,7 +39,8 @@ def dijkstra(size: int, W: list) -> (int, int): # That's the wrong return type s
             estimates[x] = W[0][x]
             candidates[x] = True
 
-    while INFINITY in costs:
+    #while INFINITY in costs:
+    while costs[end] == INFINITY:
         # Find lowest cost candidate
         best_cost = INFINITY
         v = None
@@ -73,6 +73,5 @@ if __name__ == "__main__":
     files = list(filter(lambda s: s.startswith('Dijkstra_Data_'), os.listdir()))
     files = sorted(files, key = lambda s: int(s[:-4][14:]))
     for f in files:
-        size, W = get(f)
-        worst, cost = dijkstra(size, W)
+        worst, cost = dijkstra(*get(f))
         print(f"{f[:-4][14:]}: The highest cost node is {worst}, with cost {cost}")
