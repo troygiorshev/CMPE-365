@@ -27,6 +27,9 @@ def f1(s: str) -> int:
     WHAT HOW WHY HOW
     I hope it was recommended as a bad example...
     <https://www.youtube.com/watch?v=ECQyFzzBHlo>
+    OH I FOUND IT!
+    It's in the first edition K&R!
+    <http://www.cse.yorku.ca/~oz/hash.html>
     """
 
     ret = 0  # sum is a python builtin
@@ -41,6 +44,13 @@ def f2(s: str) -> int:
     ret = 0
     for c in s:
         ret = 2 * ret + ord(c)
+    return ret
+
+def f3(s: str) -> int:
+    """Function 3, possibly what python actually uses for dict."""
+    ret = ord(s[0]) << 7
+    for c in s[1:]:
+        ret = ((1000003 * ret) ^ ord(c)) % (1<<32)
     return ret
 
 
@@ -71,6 +81,8 @@ def main() -> None:
     print(f"F1 Collision Ratio: {eval_fn(f1, 'words1.txt'):0.2}")
     print(f"F2 Collision Ratio: {eval_fn(f2, 'words1.txt'):0.2}")
     # Wow that was a lot better
+    print(f"F3 Collision Ratio: {eval_fn(f3, 'words1.txt'):0.2}")
+    # 0 collisions!
 
 
 main()
