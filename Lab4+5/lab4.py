@@ -1,6 +1,6 @@
 """CMPE 365 Lab 4 + 5 / Assignment 2
 
-2019-10-12 (3 Weeks: 11-02)
+2019-10-12
 
 Troy Giorshev
 20012707
@@ -22,13 +22,12 @@ So lists will always be lists of sets.  (Once possible)
 
 Recall that we're just trying to find **a** solution, we don't care about the
 number of coins (or whatever)
-
 """
 
 import math
 import random
-import matplotlib.pyplot as plt
-import os
+# import matplotlib.pyplot as plt
+
 
 class Set:  # pylint: disable=too-few-public-methods
     """Set class"""
@@ -43,6 +42,8 @@ class Set:  # pylint: disable=too-few-public-methods
 
 # Is there a name for a "constant" object?
 EMPTY_SET = Set([])
+
+# Global
 count = 0
 
 
@@ -83,7 +84,7 @@ def bfi_subset_sum_alg(full: Set, k: int) -> Set:
 
 def bfi_subset_sum(full: list, k: int) -> None:
     """Wrapper for the BFI algorithm
-    
+
     Arguments:
         S:  list of integers
         k:  The goal that the chosen subset should sum to
@@ -100,6 +101,7 @@ def get_subsets(full: Set, k: int) -> list:
     """Return a list of all of the subsets of the input set
 
     This ends early if any of the subsets work.
+    This is my "call to BFI" when doing HS
 
     Arguments:
         full:  Set of integers AT LEAST ONE ELEMENT
@@ -176,12 +178,13 @@ def hs_subset_sum_alg(full: Set, k: int) -> Set:
             p1 += 1
         else:
             p2 -= 1
-        count += 2 # For the two checks in the while condition
+        count += 2  # For the two checks in the while condition
     return EMPTY_SET
+
 
 def hs_subset_sum(S: list, k: int) -> None:
     """Wrapper for my Horowitz-Sahni algorithm
-    
+
     Arguments:
         S:  list of integers
         k:  The goal that the chosen subset should sum to
@@ -295,20 +298,27 @@ def test() -> None:
     print(count)
     print()
 
+
 def experiment() -> None:
+    """Experimentally verify the complexity of the two algorithms
+
+    Sorry about the sort of rough naming...
+    """
+    global count
+
     bfi_x = []
     bfi_y = []
     hs_x = []
     hs_y = []
 
-    for n in range(4,15):       # Set size
-        hs_n = 0
-        bfi_n = 0
-        for _ in range(1,20):   # Number of tests
-            hs = 0
-            bfi = 0
-            S = [random.randint(1,100) for i in range(n)]
-            targets = [random.randint(30,200) for i in range(10)]
+    for n in range(4, 17):  # Set size
+        hs_n = 0.0  # Average number of operations with HS for this n
+        bfi_n = 0.0 # Average number of operations with BFI for this n
+        for _ in range(1, 20):  # Number of tests
+            hs = 0.0    # Average number with HS for this set
+            bfi = 0.0   # Average number with BFI for this set
+            S = [random.randint(1, 100) for i in range(n)]
+            targets = [random.randint(30, 200) for i in range(10)]
             for total in targets:
                 count = 0
                 hs_subset_sum(S, total)
@@ -318,26 +328,81 @@ def experiment() -> None:
                 bfi += count
             hs_n += hs / 10
             bfi_n += bfi / 10
-        hs_n  = hs_n / 20
+        hs_n = hs_n / 20
         bfi_n = bfi_n / 20
         bfi_x.append(n)
         bfi_y.append(bfi_n)
         hs_x.append(n)
         hs_y.append(hs_n)
 
-    print(bfi_x)
-    print(bfi_y)
+    # plt.scatter(bfi_x, bfi_y, c="red")
+    # plt.title("BFI scatter plot")
+    # plt.xlabel("n")
+    # plt.ylabel("# operations")
+    # plt.savefig("BFI.png")
 
-    plt.scatter(bfi_x, bfi_y)
-    plt.title("BFI scatter plot")
-    plt.xlabel("n")
-    plt.savefig("This.png")
+    # plt.scatter(hs_x, hs_y, c="blue")
+    # plt.title("BFI (red) and HS (blue)")
+    # plt.xlabel("n")
+    # plt.ylabel("# operations")
+    # plt.savefig("Both.png")
+    # plt.close()
 
-    plt.scatter(hs_x, hs_y)
-    plt.title("HS scatter plot")
-    plt.xlabel("n")
-    plt.ylabel("# operations")
-    #plt.show()
+    # plt.scatter(hs_x, hs_y, c="blue")
+    # plt.title("HS scatter plot")
+    # plt.xlabel("n")
+    # plt.ylabel("# operations")
+    # plt.savefig("HS.png")
+    # plt.close()
+
+    print()
+    print("BFI")
+    for i, _ in enumerate(bfi_x):
+        print(f"{bfi_x[i]} \t {bfi_y[i]:0.1f}")
+
+    print()
+    print("HS")
+    for i, _ in enumerate(hs_x):
+        print(f"{hs_x[i]} \t {hs_y[i]:0.1f}")
+
+    # See how they compare to calculated values
+    two_n_y = []
+    two_n_x = []
+    for x in range(4, 17):
+        two_n_y.append(2.2 * (2**x) + 30)
+        two_n_x.append(x)
+
+    print()
+    print("2.2*2^n+30")
+    for i, _ in enumerate(two_n_y):
+        print(f"{two_n_x[i]} \t {two_n_y[i]:0.1f}")
+
+    # plt.scatter(bfi_x, bfi_y, c="red")
+    # plt.title("BFI (red) vs 2.2*2^n+30 (green)")
+    # plt.xlabel("n")
+    # plt.ylabel("# operations")
+    # plt.scatter(two_n_x, two_n_y, c="green")
+    # plt.savefig("BFIvs2n.png")
+    # plt.close()
+
+    two_n2_y = []
+    two_n2_x = []
+    for x in range(4, 17):
+        two_n2_y.append(2 * x * (2**(x / 2)) + 80)
+        two_n2_x.append(x)
+
+    print()
+    print("2n*^(n/2)+80")
+    for i, _ in enumerate(two_n2_y):
+        print(f"{two_n2_x[i]} \t {two_n2_y[i]:0.1f}")
+
+    # plt.scatter(hs_x, hs_y, c="blue")
+    # plt.title("HS (blue) vs 2n*^(n/2)+80 (green)")
+    # plt.xlabel("n")
+    # plt.ylabel("# operations")
+    # plt.scatter(two_n2_x, two_n2_y, c="green")
+    # plt.savefig("HSvs2n2.png")
+    # plt.close()
 
 
 def main() -> None:

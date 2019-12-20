@@ -1,1 +1,0 @@
-I can't use matplotlib in WSL, so this script is currently outdated

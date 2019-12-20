@@ -39,15 +39,14 @@ def dijkstra(size: int, W: list) -> (int, int): # That's the wrong return type s
             estimates[x] = W[0][x]
             candidates[x] = True
 
-    #while INFINITY in costs:
-    while costs[end] == INFINITY:
+    while INFINITY in costs:
         # Find lowest cost candidate
         best_cost = INFINITY
         v = None
         for x in range(size):
             if candidates[x] and estimates[x] < best_cost:
-                    best_cost = estimates[x]
-                    v = x
+                best_cost = estimates[x]
+                v = x
 
         costs[v] = estimates[v]
         reached[v] = True
@@ -65,13 +64,13 @@ def dijkstra(size: int, W: list) -> (int, int): # That's the wrong return type s
         if costs[x] > tmp:
             worst = x
             tmp = costs[x]
-    
+ 
     return (worst, costs[worst])
 
 if __name__ == "__main__":
     print()
     files = list(filter(lambda s: s.startswith('Dijkstra_Data_'), os.listdir()))
-    files = sorted(files, key = lambda s: int(s[:-4][14:]))
+    files = sorted(files, key=lambda s: int(s[:-4][14:]))
     for f in files:
         worst, cost = dijkstra(*get(f))
         print(f"{f[:-4][14:]}: The highest cost node is {worst}, with cost {cost}")
