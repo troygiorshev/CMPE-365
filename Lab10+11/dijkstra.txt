@@ -1,0 +1,24 @@
+Match:    Dijkstra.py <1 .. 2>       Dijkstra_py3.py <1 .. 2>
+Mismatch: Dijkstra.py <3 .. 3>       Dijkstra_py3.py <3 .. 3>
+Match:    Dijkstra.py <4 .. 5>       Dijkstra_py3.py <4 .. 5>
+Mismatch: Dijkstra.py None           Dijkstra_py3.py <6 .. 7>
+Match:    Dijkstra.py <6 .. 9>       Dijkstra_py3.py <8 .. 11>
+Mismatch: Dijkstra.py <10 .. 11>     Dijkstra_py3.py None
+Match:    Dijkstra.py <12 .. 15>     Dijkstra_py3.py <12 .. 15>
+Mismatch: Dijkstra.py <16 .. 16>     Dijkstra_py3.py <16 .. 16>
+Match:    Dijkstra.py <17 .. 32>     Dijkstra_py3.py <17 .. 32>
+Mismatch: Dijkstra.py None           Dijkstra_py3.py <33 .. 33>
+Match:    Dijkstra.py <33 .. 33>     Dijkstra_py3.py <34 .. 34>
+Mismatch: Dijkstra.py <34 .. 35>     Dijkstra_py3.py None
+Match:    Dijkstra.py <36 .. 61>     Dijkstra_py3.py <35 .. 60>
+Mismatch: Dijkstra.py <62 .. 65>     Dijkstra_py3.py <61 .. 64>
+Match:    Dijkstra.py <66 .. 73>     Dijkstra_py3.py <65 .. 72>
+Mismatch: Dijkstra.py <74 .. 78>     Dijkstra_py3.py <73 .. 77>
+Match:    Dijkstra.py <79 .. 89>     Dijkstra_py3.py <78 .. 88>
+Mismatch: Dijkstra.py <90 .. 90>     Dijkstra_py3.py <89 .. 89>
+Match:    Dijkstra.py <91 .. 101>    Dijkstra_py3.py <90 .. 100>
+Mismatch: Dijkstra.py <102 .. 103>   Dijkstra_py3.py <101 .. 102>
+Match:    Dijkstra.py <104 .. 104>   Dijkstra_py3.py <103 .. 103>
+Mismatch: Dijkstra.py <105 .. 105>   Dijkstra_py3.py <104 .. 104>
+Match:    Dijkstra.py <106 .. 106>   Dijkstra_py3.py <105 .. 105>
+Mismatch: Dijkstra.py <107 .. 109>   Dijkstra_py3.py <106 .. 110>

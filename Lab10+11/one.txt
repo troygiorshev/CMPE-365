@@ -1,0 +1,6 @@
+start
+this
+that
+yes
+no
+done
